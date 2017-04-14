@@ -9,27 +9,23 @@
  * @return {Object}
  */
 function getScoresSummary(userScores) {
-    const validScores = [];
+    let sum = 0;
+    let avgTime = 0;
+    let validEntries = 0;
 
     for (let i = 0; i < userScores.length; i++) {
         const item = userScores[i];
 
         if (item.score >= 50 && item.time >= 30) {
-            validScores.push(item);
+            validEntries += 1;
+            sum += item.score;
+            avgTime += item.time;
         }
-    }
-
-    let sum = 0;
-    let avgTime = 0;
-
-    for (let i = 0; i < validScores.length; i++) {
-        sum += validScores[i].score;
-        avgTime += validScores[i].time;
     }
 
     return {
         sum,
-        avgTime: avgTime / validScores.length,
+        avgTime: avgTime / validEntries,
     };
 }
 
